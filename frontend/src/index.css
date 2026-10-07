@@ -1,0 +1,5 @@
+@tailwind base; @tailwind components; @tailwind utilities;
+.btn{@apply px-3 py-1.5 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 disabled:opacity-50}
+.btn2{@apply px-3 py-1.5 rounded-lg border border-slate-300 bg-white text-sm hover:bg-slate-100}
+.card{@apply bg-white rounded-xl border border-slate-200 p-4 shadow-sm}
+.inp{@apply border border-slate-300 rounded-lg px-2 py-1.5 text-sm w-full}

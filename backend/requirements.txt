@@ -1,0 +1,11 @@
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20
+pydantic==2.10.4
+numpy>=1.26,<2.0
+openpyxl==3.1.5
+scikit-learn>=1.5,<1.7
+opencv-python-headless==4.10.0.84
+Pillow>=10.4,<11.2
+tensorflow-cpu==2.17.1; sys_platform == "linux"
+tensorflow==2.17.1; sys_platform != "linux"
