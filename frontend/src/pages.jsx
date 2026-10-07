@@ -44,7 +44,9 @@ export function Dataset({ pid, toast }) {
 }
 
 export function Health({ pid }) {
-  const { data: h, error, loading } = useLoad(() => api.health(pid), [pid]); const { data: sp } = useLoad(() => api.split(pid, 0.7).catch(() => null), [pid]);
+  const hasPid = pid != null && pid !== "" && !Number.isNaN(Number(pid));
+  const { data: h, error, loading } = useLoad(() => hasPid ? api.datasetHealth(pid) : Promise.resolve(null), [pid]); const { data: sp } = useLoad(() => hasPid ? api.split(pid, 0.7).catch(() => null) : Promise.resolve(null), [pid]);
+  if (!hasPid) return <Empty>Select or create a project first.</Empty>;
   if (loading) return <Spinner />; if (error) return <ErrorBox error={error} />;
   const bar = Object.entries(h.per_class).map(([name, count]) => ({ name, count }));
   return <div><h1 className="text-xl font-semibold mb-3">Dataset Health</h1>

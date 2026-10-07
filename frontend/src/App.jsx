@@ -5,7 +5,7 @@ import { useToast } from "./ui";
 const PROJ = [["overview", "Overview"], ["dataset", "Dataset Manager"], ["health", "Dataset Health"], ["train", "Training"], ["eval", "Evaluation"], ["live", "Live Prediction"], ["history", "Experiment History"], ["versions", "Model Versions"], ["report", "Reports"]];
 export default function App() {
   const [pid, setPid] = useState(null); const [page, setPage] = useState("dashboard"); const [toast, toastEl] = useToast(); const [nav, setNav] = useState(false); const [up, setUp] = useState(null);
-  useEffect(() => { let stop = false; const ping = () => api.health().then(() => !stop && setUp(true)).catch(() => { if (!stop) { setUp(false); setTimeout(ping, 5000); } }); ping(); return () => { stop = true; }; }, []);
+  useEffect(() => { let stop = false, t; const ping = () => api.ping().then(() => !stop && setUp(true)).catch(() => { if (!stop) { setUp(false); t = setTimeout(ping, 5000); } }); ping(); return () => { stop = true; clearTimeout(t); }; }, []);
   const misconfigured = import.meta.env.PROD && !API;
   const open = (id) => { setPid(id); setPage("overview"); }; const go = setPage;
   const P = { pid, toast, go };
